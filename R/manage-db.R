@@ -1,6 +1,7 @@
 #' Open connection with GEOmetadb
 #'
-#' A wrapper for connecting to the GEOmetadb sql database to allow dbListFields into sql queries
+#' A wrapper for connecting to the GEOmetadb sql database to allow 
+#' dbListFields into sql queries
 #'
 #' @param db.path path where GEOmetadb.sqlite is stored
 #'
@@ -15,7 +16,8 @@ geograbr.connect.db <- function(db.path="."){
 
 #' Update the GEOmetadb sql directory
 #'
-#' Moves the current GEOmetadb.sqlite database to an archived directory of your choice and then downloads a new version of this file
+#' Moves the current GEOmetadb.sqlite database to an archived directory of 
+#' your choice and then downloads a new version of this file
 #'  
 #'
 #' @param archive.path path where GEOmetadb.sqlite will be archived
@@ -36,7 +38,8 @@ geograbr.replace.GEOmetadb.sqlite <-function(archive.path="."){
 
 #' Query the GEOmetadb sql directory for GSEs
 #'
-#' Uses an sql expression to query the GEOmetadb database and returns all GSE numbers meeting the search criteria
+#' Uses an sql expression to query the GEOmetadb database and returns all GSE 
+#' numbers meeting the search criteria
 #'
 #' @param sql an sql expression to query the GEOmetadb database
 #' @param db.path path where GEOmetadb.sqlite is stored

@@ -5,7 +5,7 @@ Date: 2017-08-21
 Authors: person("Paul", "Yousefi", email = "paul.yousefi@bristol.ac.uk", role = c("aut", "cre"))
 Maintainer: Paul Yousefi <paul.yousefi@bristol.ac.uk>
 Description: An interface for querying GEO records, and retrieving sample and experiment data
-Depends: R (>= 3.3.2)
+Depends: R (>= 3.3.0)
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true

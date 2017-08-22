@@ -12,5 +12,6 @@ geograbr.query.db.gses(sql, db.path = ".")
 \item{db.path}{path where GEOmetadb.sqlite is stored}
 }
 \description{
-Uses an sql expression to query the GEOmetadb database and returns all GSE numbers meeting the search criteria
+Uses an sql expression to query the GEOmetadb database and returns all GSE 
+numbers meeting the search criteria
 }

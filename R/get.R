@@ -1,12 +1,21 @@
-#' 
+#' Get GEO sample information 
 geograbr.get.samples <- function(filename, FUN=geo.read.gse.matrix) {
     gse <- tolower(names(filename))
     cat(date(), "reading", gse,"\n")
     FUN(filename, data=FALSE)
 }
 
+#' Get GEO data 
 #' 
-geograbr.get.data <- function(filename, path=NULL, geo.sites=NULL,  FUN=geo.read.gse.matrix) {
+#' Grabs the expression/microarray/etc. data contained in the GEO series
+#'  matrix files
+#' 
+#' @param filename 
+#' 
+#' @export
+#' 
+geograbr.get.data <- function(filename, path=NULL, geo.sites=NULL,  
+    FUN=geo.read.gse.matrix) {
     gse <- tolower(names(filename))
 
     cat(date(), "reading", gse,"\n")
@@ -24,7 +33,10 @@ geograbr.get.data <- function(filename, path=NULL, geo.sites=NULL,  FUN=geo.read
     return(x)
 }
 
-
+#' Read GEO gse series matrix
+#' 
+#' Interface for reading a gse series matrix file as downloaded by 
+#' \code{geograbr.download.series.files}
 geograbr.read.gse.matrix <- function(filename, data=TRUE) {
     i <-100; dat <-"";
     while (sum(sign(grepl("!series_matrix_table_begin", dat)))<1) {
@@ -36,8 +48,10 @@ geograbr.read.gse.matrix <- function(filename, data=TRUE) {
     nsamples <- sum(grepl("^!Sample_", dat))
     ndata <- length(dat) - match("!series_matrix_table_begin", dat) - 2
     con <- file(filename, "r")
-    header <- read.table(con, sep="\t", header=F, nrows=nseries, stringsAsFactors=F)
-    samples <- read.table(con, sep="\t", header=F, nrows=nsamples, stringsAsFactors=F)
+    header <- read.table(con, sep="\t", header=F, nrows=nseries, 
+        stringsAsFactors=F)
+    samples <- read.table(con, sep="\t", header=F, nrows=nsamples, 
+        stringsAsFactors=F)
     samples <- t(samples)
     colnames(samples) <- samples[1,]
     colnames(samples) <- sub("!Sample_", "", colnames(samples))
@@ -48,8 +62,9 @@ geograbr.read.gse.matrix <- function(filename, data=TRUE) {
     if(data==FALSE) return(samples)
 
     readLines(con,1)
-    data <- read.table(con, sep="\t", header=TRUE, quote="\"", dec=".", fill=TRUE,
-                       na.strings = c("NA", "null", "NULL", "Null"), comment.char = "")
+    data <- read.table(con, sep="\t", header=TRUE, quote="\"", dec=".", 
+        fill=TRUE,
+        na.strings = c("NA", "null", "NULL", "Null"), comment.char = "")
     close(con)
     if (ndata == 0)
         data <- data[-(1:nrow(data)),]
@@ -72,14 +87,16 @@ geograbr.read.gse.matrix <- function(filename, data=TRUE) {
 
     stopifnot(length(rownames(data)) == nrow(data))
     stopifnot(length(colnames(data)) == ncol(data))
-    if(!is.null(geo.sites)) stopifnot(length(intersect(rownames(data), geo.sites)) > 100000)
+    if(!is.null(geo.sites)) stopifnot(length(intersect(rownames(data), 
+        geo.sites)) > 100000)
     
     i <- match(colnames(data), as.character(samples$geo_accession))
     if (any(is.na(i))) {
         data <- data[,which(!is.na(i)), drop=F]
     }
     
-    if(!is.null(geo.sites)) data <- data[match(geo.sites, rownames(data)),,drop=F]
+    if(!is.null(geo.sites)) data <- data[match(geo.sites, rownames(data)),,
+        drop=F]
 
    list(data=data, samples=samples)
 }

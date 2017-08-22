@@ -10,5 +10,6 @@ geograbr.connect.db(db.path = ".")
 \item{db.path}{path where GEOmetadb.sqlite is stored}
 }
 \description{
-A wrapper for connecting to the GEOmetadb sql database to allow dbListFields into sql queries
+A wrapper for connecting to the GEOmetadb sql database to allow 
+dbListFields into sql queries
 }

@@ -10,5 +10,6 @@ geograbr.replace.GEOmetadb.sqlite(archive.path = ".")
 \item{archive.path}{path where GEOmetadb.sqlite will be archived}
 }
 \description{
-Moves the current GEOmetadb.sqlite database to an archived directory of your choice and then downloads a new version of this file
+Moves the current GEOmetadb.sqlite database to an archived directory of 
+your choice and then downloads a new version of this file
 }
