@@ -1,5 +1,5 @@
 #' Get GEO sample information 
-geograbr.get.samples <- function(filename, FUN=geo.read.gse.matrix) {
+geograbr.get.samples <- function(filename, FUN=geograbr.read.gse.matrix) {
     gse <- tolower(names(filename))
     cat(date(), "reading", gse,"\n")
     FUN(filename, data=FALSE)
@@ -15,7 +15,7 @@ geograbr.get.samples <- function(filename, FUN=geo.read.gse.matrix) {
 #' @export
 #' 
 geograbr.get.data <- function(filename, path=NULL, geo.sites=NULL,  
-    FUN=geo.read.gse.matrix) {
+    FUN=geograbr.read.gse.matrix) {
     gse <- tolower(names(filename))
 
     cat(date(), "reading", gse,"\n")
