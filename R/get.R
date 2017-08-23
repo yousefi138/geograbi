@@ -52,6 +52,7 @@ geograbr.read.gse.matrix <- function(filename, data=TRUE) {
         stringsAsFactors=F)
     samples <- read.table(con, sep="\t", header=F, nrows=nsamples, 
         stringsAsFactors=F)
+    close(con)    
     samples <- t(samples)
     colnames(samples) <- samples[1,]
     colnames(samples) <- sub("!Sample_", "", colnames(samples))
