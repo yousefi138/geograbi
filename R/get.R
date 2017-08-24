@@ -61,7 +61,8 @@ geograbr.read.gse.matrix <- function(filename, data=TRUE) {
     gc()
 
     if(data==FALSE) return(samples)
-
+    
+    con <- file(filename, "r")
     readLines(con,1)
     data <- read.table(con, sep="\t", header=TRUE, quote="\"", dec=".", 
         fill=TRUE,
