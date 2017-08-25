@@ -2,6 +2,7 @@
 
 export(geograbr.connect.db)
 export(geograbr.download.series.files)
+export(geograbr.download.supplementary.file)
 export(geograbr.extract.characteristic)
 export(geograbr.get.data)
 export(geograbr.query.db.gses)

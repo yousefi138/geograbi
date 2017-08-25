@@ -4,7 +4,7 @@
 \alias{geograbr.get.samples}
 \title{Get GEO sample information}
 \usage{
-geograbr.get.samples(filename, FUN = geo.read.gse.matrix)
+geograbr.get.samples(filename, FUN = geograbr.read.gse.matrix)
 }
 \description{
 Get GEO sample information

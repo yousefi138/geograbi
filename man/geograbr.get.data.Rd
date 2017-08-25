@@ -5,7 +5,7 @@
 \title{Get GEO data}
 \usage{
 geograbr.get.data(filename, path = NULL, geo.sites = NULL,
-  FUN = geo.read.gse.matrix)
+  FUN = geograbr.read.gse.matrix)
 }
 \arguments{
 \item{filename}{}
