@@ -4,7 +4,8 @@
 \alias{geograbr.download.supplementary.file}
 \title{Download a GEO supplementary file}
 \usage{
-geograbr.download.supplementary.file(path = ".", gse, sup.file.name)
+geograbr.download.supplementary.file(path = ".", gse, sup.file.name = NULL,
+  url = NULL)
 }
 \arguments{
 \item{path}{path for saving downloaded GEO series matrix files}
@@ -12,6 +13,8 @@ geograbr.download.supplementary.file(path = ".", gse, sup.file.name)
 \item{gse}{character of gse of interest}
 
 \item{sup.file.name}{name of specific supplemental file from gse to downloads}
+
+\item{url}{optional manual url supply for non-ftp based file downloads}
 }
 \description{
 Takes a GSE and a corresponding GEO supplementary file name
