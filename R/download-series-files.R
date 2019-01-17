@@ -5,21 +5,24 @@
 #' and downloads the GEO series matrix files to a specified directory
 #'
 #' @param path path for saving downloaded GEO series matrix files
-#' @param gpl the gpl platform codes from GEO for all 
 #' @param gses vector of gses to download from GEO 
+#' @param gpls vector of platform gpl codes with same length as \code{gses}
 #'
 #' @export
-geograbr.download.series.files <- function(path=".", gpl = "GPL13534", gses) {
+#' 
+geograbr.download.series.files <- function(path=".", gses, gpls = NULL) {
     require(RCurl)
-    filenames <- sapply(gses, function(geo) {
-        prefix <- substring(geo,1,5)
+    filenames <- sapply(seq_along(gses), function(gse) {
+        prefix <- substring(gses[gse],1,5)
         urls <- paste("ftp://ftp.ncbi.nlm.nih.gov/geo/series/",
                       prefix, "nnn/",
-                      geo, "/matrix/",
-                      geo, "_series_matrix.txt.gz", sep="")
-        urls <- c(urls, gsub("_series_", paste0("-",gpl,"_series_"), urls[1]))
-        
-        base::cat(base::date(), geo, urls[1], "\n")
+                      gses[gse], "/matrix/",
+                      gses[gse], "_series_matrix.txt.gz", sep="")
+        if(!is.null(gpls)){           
+          urls <- c(urls, gsub("_series_", paste0("-",gpls[gse],"_series_"), urls[1]))
+        }
+
+        base::cat(base::date(), gses[gse], urls[1], "\n")
 
         for (url in urls) {
             destination <- file.path(path, basename(url))
