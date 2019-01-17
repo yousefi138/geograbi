@@ -1,3 +1,6 @@
+geograbr
+========
+
 A tool for efficiently grabbing usable metadata and experiment data off GEO for use in R.
 
 Getting experiment metadata and GSE accession numbers
@@ -20,8 +23,8 @@ datasets <- geograbr.retrieve.datasets()  ## about 4min
 datasets <- geograbr.retrieve.datasets(gpl = c("GPL13534")) ## 5sec
 ```
 
-    > Thu Jan 17 14:02:17 2019 retrieving dataset UID 1 ...
-    > Thu Jan 17 14:02:23 2019 retrieved 1192
+    > Thu Jan 17 14:47:24 2019 retrieving dataset UID 1 ...
+    > Thu Jan 17 14:47:30 2019 retrieved 1192
 
 ``` r
 str(datasets)

@@ -5,6 +5,8 @@ output:
     variant: markdown_github	
 ---
 
+# geograbr
+
 A tool for efficiently grabbing usable metadata and experiment data off GEO for use in R.
 
 ## Getting experiment metadata and GSE accession numbers
