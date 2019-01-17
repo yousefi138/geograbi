@@ -1,0 +1,68 @@
+---
+title: "geograbr"
+output:
+  md_document:
+    variant: markdown_github	
+---
+
+A tool for efficiently grabbing usable metadata and experiment data off GEO for use in R.
+
+## Getting experiment metadata and GSE accession numbers
+
+Metadata by experiment accession number can be returned for **all** GEO experiments or **by GPL platform code**
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(
+comment = ">",
+error = FALSE,
+tidy = FALSE,
+echo = TRUE, 
+warning = FALSE, 
+message = FALSE,
+width=85,
+eval = FALSE)
+```
+
+```{r load.grabr, eval = TRUE}
+devtools::load_all("~/repos/geograbr")
+require("XML")
+```
+
+```{r retrieve.datasets.01}
+## all datasets in GEO
+datasets <- geograbr.retrieve.datasets()  ## about 4min
+```
+```{r retrieve.datasets.02, eval = TRUE}
+## all Illumina Infinium 27K DNA methylation datasets
+datasets <- geograbr.retrieve.datasets(gpl = c("GPL13534")) ## 5sec
+str(datasets)
+```
+
+
+## Download GEO series matix files for by GSE experiment numbers
+
+```{r download.series.files}
+## by individual gses
+filenames <- geograbr.download.series.files(gses = "GSE94734")
+
+## or for a vector of gses
+filenames <- geograbr.download.series.files(gses = datasets$accession[1:6])
+```
+
+## Grab sample-level data from downloaded series matrix files
+
+```{r get.samples}
+
+gse94734 <- geograbr.get.samples(filename = "GSE94734_series_matrix.txt.gz")
+
+gses <- lapply(na.omit(filenames), geograbr.get.samples)
+
+```
+
+## Grab experiment data from downloaded series matrix files
+
+Automatically saves data to `.rdata` format at user-defined path
+
+```{r get.data}
+test <- geograbr.get.data(filename = "GSE94734_series_matrix.txt.gz")
+```
