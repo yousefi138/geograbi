@@ -4,14 +4,14 @@
 \alias{geograbr.download.series.files}
 \title{Download GEO series matrix files}
 \usage{
-geograbr.download.series.files(path = ".", gpl = "GPL13534", gses)
+geograbr.download.series.files(path = ".", gses, gpls = NULL)
 }
 \arguments{
 \item{path}{path for saving downloaded GEO series matrix files}
 
-\item{gpl}{the gpl platform codes from GEO for all}
-
 \item{gses}{vector of gses to download from GEO}
+
+\item{gpls}{vector of platform gpl codes with same length as \code{gses}}
 }
 \description{
 Takes a vector of GSEs, say as returned by \code{geo.query.db.gses}, and 
