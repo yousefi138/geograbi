@@ -33,26 +33,42 @@ geograbr.get.data <- function(filename, path=NULL, geo.sites=NULL,
     return(x)
 }
 
+is.url <- function(x) "url" %in% class(tryCatch(url(x), error=function(e) e))
+
 #' Read GEO gse series matrix
 #' 
 #' Interface for reading a gse series matrix file as downloaded by 
 #' \code{geograbr.download.series.files}
+#' 
 geograbr.read.gse.matrix <- function(filename, data=TRUE) {
-    i <-100; dat <-"";
+    # parse filename 
+    if(grepl("^gse*", filename, ignore.case = T)) {
+        prefix <- sub("([0-9]{3}$)", "nnn", filename)        
+        filename <- paste("ftp://ftp.ncbi.nlm.nih.gov/geo/series/",
+                      prefix, "/",
+                      filename, "/matrix/",
+                      filename, "_series_matrix.txt.gz", sep="")
+    }
+
+    if (is.url(filename)) {
+        filename <- gzcon(url(filename))
+    } 
+
+    i <-100; dat <-NULL;
     while (sum(sign(grepl("!series_matrix_table_begin", dat)))<1) {
-        dat <- readLines(filename, n=i)
+        dat <- c(dat, readLines(filename, n=i))
        i = i*2
     }
 
     nseries <- sum(grepl("^!Series_", dat))
     nsamples <- sum(grepl("^!Sample_", dat))
     ndata <- length(dat) - match("!series_matrix_table_begin", dat) - 2
-    con <- file(filename, "r")
+    con <- textConnection(dat)
     header <- read.table(con, sep="\t", header=F, nrows=nseries, 
         stringsAsFactors=F)
     samples <- read.table(con, sep="\t", header=F, nrows=nsamples, 
         stringsAsFactors=F)
-    close(con)    
+    closeAllConnections()    
     samples <- t(samples)
     colnames(samples) <- samples[1,]
     colnames(samples) <- sub("!Sample_", "", colnames(samples))
