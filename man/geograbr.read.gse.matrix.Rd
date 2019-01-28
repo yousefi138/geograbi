@@ -2,11 +2,25 @@
 % Please edit documentation in R/get.R
 \name{geograbr.read.gse.matrix}
 \alias{geograbr.read.gse.matrix}
-\title{Read GEO gse series matrix}
+\title{Load a GSE matrix file from GEO}
 \usage{
 geograbr.read.gse.matrix(filename, data = TRUE)
 }
+\arguments{
+\item{filename}{A character string that is a GSE identifier,
+a url for GSE matrix file online, or a filename for a local
+GSE matrix file.}
+
+\item{data}{If \code{TRUE}, then load the data matrix,
+otherwise load only the sample information.}
+}
+\value{
+A list with two elements:
+\itemize{
+\item{"samples"}{The sample data frame with one row per sample.}
+\item{"data"}{The data matrix with one row per feature and one per sample.}
+}
+}
 \description{
-Interface for reading a gse series matrix file as downloaded by 
-\code{geograbr.download.series.files}
+Load a GSE matrix file from GEO
 }
