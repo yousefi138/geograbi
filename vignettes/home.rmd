@@ -1,11 +1,14 @@
 ---
-title: "geograbr"
-output:
-  md_document:
-    variant: markdown_github	
+title: "geograbbi: grabbing GEO data efficiently"
+author: "Paul Yousefi"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::md_document:
+    toc: true
+    toc_depth: 2
 ---
 
-# geograbr
+# geograbbi
 
 A tool for efficiently grabbing usable metadata and experiment data off GEO for use in R.
 
@@ -26,17 +29,17 @@ eval = FALSE)
 ```
 
 ```{r load.grabr, eval = TRUE}
-devtools::load_all("~/repos/geograbr")
-require("XML")
+suppressWarnings(suppressPackageStartupMessages(library(geograbbi)))
+#require("XML")
 ```
 
 ```{r retrieve.datasets.01}
 ## all datasets in GEO
-datasets <- geograbr.retrieve.datasets()  ## about 4min
+datasets <- geograbbi.retrieve.datasets()  ## about 4min
 ```
 ```{r retrieve.datasets.02, eval = TRUE}
 ## all Illumina Infinium 27K DNA methylation datasets
-datasets <- geograbr.retrieve.datasets(gpl = c("GPL13534")) ## 5sec
+datasets <- geograbbi.retrieve.datasets(gpl = c("GPL13534")) ## 5sec
 str(datasets)
 ```
 
@@ -45,19 +48,19 @@ str(datasets)
 
 ```{r download.series.files}
 ## by individual gses
-filenames <- geograbr.download.series.files(gses = "GSE94734")
+filenames <- geograbbi.download.series.files(gses = "GSE94734")
 
 ## or for a vector of gses
-filenames <- geograbr.download.series.files(gses = datasets$accession[1:6])
+filenames <- geograbbi.download.series.files(gses = datasets$accession[1:6])
 ```
 
 ## Grab sample-level data from downloaded series matrix files
 
 ```{r get.samples}
 
-gse94734 <- geograbr.get.samples(filename = "GSE94734_series_matrix.txt.gz")
+gse94734 <- geograbbi.get.samples(filename = "GSE94734_series_matrix.txt.gz")
 
-gses <- lapply(na.omit(filenames), geograbr.get.samples)
+gses <- lapply(na.omit(filenames), geograbbi.get.samples)
 
 ```
 
@@ -66,5 +69,5 @@ gses <- lapply(na.omit(filenames), geograbr.get.samples)
 Automatically saves data to `.rdata` format at user-defined path
 
 ```{r get.data}
-test <- geograbr.get.data(filename = "GSE94734_series_matrix.txt.gz")
+test <- geograbbi.get.data(filename = "GSE94734_series_matrix.txt.gz")
 ```

@@ -16,7 +16,7 @@
 #'   datasets <- geograbbi.retrieve.datasets(c("GPL8490", "GPL13534", "GPL21145")) ## 5sec
 #' 
 #' @export
-geograb.retrieve.datasets <- function(gpl=NULL,retmax=10000) {
+geograbbi.retrieve.datasets <- function(gpl=NULL,retmax=10000) {
     ## https://www.ncbi.nlm.nih.gov/geo/info/geo_paccess.html
 
     ## retrieve summaries of datasets 'retmax' at a time
