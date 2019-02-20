@@ -6,7 +6,7 @@
 #' @param db.path path where GEOmetadb.sqlite is stored
 #'
 #' @export
-geograbr.connect.db <- function(db.path="."){
+geograbbi.connect.db <- function(db.path="."){
     require(GEOmetadb)
     filename <- file.path(db.path, 'GEOmetadb.sqlite')
     if(!file.exists(filename)) getSQLiteFile()
@@ -23,7 +23,7 @@ geograbr.connect.db <- function(db.path="."){
 #' @param archive.path path where GEOmetadb.sqlite will be archived
 #'
 #' @export
-geograbr.replace.GEOmetadb.sqlite <-function(archive.path="."){
+geograbbi.replace.GEOmetadb.sqlite <-function(archive.path="."){
     archive.dir <- file.path(archive.path, paste("GEOmetadb.sqlite.archive", gsub(" ", "_", date(), fixed = TRUE), sep = "_"))
     dir.create(archive.dir)
 
@@ -45,8 +45,8 @@ geograbr.replace.GEOmetadb.sqlite <-function(archive.path="."){
 #' @param db.path path where GEOmetadb.sqlite is stored
 #'
 #' @export
-geograbr.query.db.gses <- function(sql, db.path="."){
-    con <- geograbr.connect.db(db.path)
+geograbbi.query.db.gses <- function(sql, db.path="."){
+    con <- geograbbi.connect.db(db.path)
     geo.samples <- dbGetQuery(con,sql)
     gses <- gsub(".*,([^,]+)$", "\\1", geo.samples$series_id)
     gses
