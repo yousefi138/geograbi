@@ -7,16 +7,16 @@
 #' @return Data frame with one row per dataset.
 #' @examples 
 #'   ## all datasets in GEO
-#'   datasets <- geograbbi.retrieve.datasets()  ## about 4min
+#'   datasets <- geograbi.retrieve.datasets()  ## about 4min
 #' 
 #'   ## all Illumina Infinium 27K DNA methylation datasets
-#'   datasets <- geograbbi.retrieve.datasets(c("GPL8490")) ## 2sec
+#'   datasets <- geograbi.retrieve.datasets(c("GPL8490")) ## 2sec
 #' 
 #'   ## all Illumina Infinium 27K/450K/EPIC DNA methylation datasets
-#'   datasets <- geograbbi.retrieve.datasets(c("GPL8490", "GPL13534", "GPL21145")) ## 5sec
+#'   datasets <- geograbi.retrieve.datasets(c("GPL8490", "GPL13534", "GPL21145")) ## 5sec
 #' 
 #' @export
-geograbbi.retrieve.datasets <- function(gpl=NULL,retmax=10000) {
+geograbi.retrieve.datasets <- function(gpl=NULL,retmax=10000) {
     ## https://www.ncbi.nlm.nih.gov/geo/info/geo_paccess.html
 
     ## retrieve summaries of datasets 'retmax' at a time

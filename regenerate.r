@@ -9,7 +9,7 @@ packages <- c("devtools", "roxygen2", "knitr")
 lapply(packages, require, character.only=T)
 
 
-document("geograbbi")
+document("geograbi")
 
 system("R CMD INSTALL geograbbi")
 reload(inst("geograbbi"))

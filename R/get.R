@@ -1,6 +1,6 @@
 #' Get GEO sample information
 #' @export
-geograbbi.get.samples <- function(filename, FUN=geograbbi.read.gse.matrix) {
+geograbi.get.samples <- function(filename, FUN=geograbi.read.gse.matrix) {
     gse <- tolower(names(filename))
     cat(date(), "reading", gse,"\n")
     FUN(filename, data=FALSE)
@@ -14,8 +14,8 @@ geograbbi.get.samples <- function(filename, FUN=geograbbi.read.gse.matrix) {
 #' @param filename 
 #' 
 #' @export
-geograbbi.get.data <- function(filename, path=NULL, 
-    FUN=geograbbi.read.gse.matrix) {
+geograbi.get.data <- function(filename, path=NULL, 
+    FUN=geograbi.read.gse.matrix) {
     gse <- tolower(names(filename))
 
     cat(date(), "reading", gse,"\n")
@@ -78,7 +78,7 @@ read.until <- function(pattern, con, n=100, ...) {
 #' \item{"data"}{The data matrix with one row per feature and one per sample.}
 #' }
 #' @export
-geograbbi.read.gse.matrix <- function (filename, data = TRUE) {
+geograbi.read.gse.matrix <- function (filename, data = TRUE) {
     ## if filename is a GSE number, then obtain the url
     if (is.gse(filename))
         filename <- get.gse.matrix.url(filename)
@@ -206,7 +206,7 @@ geograbbi.read.gse.matrix <- function (filename, data = TRUE) {
 #' @return A data frame as if \code{\link{read.table}()} had been used.
 #' 
 #' @export
-geograbbi.read.table <- function(file, header=F, chunk.size=21234, verbose=F, debug=F, ...) {
+geograbi.read.table <- function(file, header=F, chunk.size=21234, verbose=F, debug=F, ...) {
     if (is.character(file)) {
         file <- file(file, "r")
         on.exit(close(file))
@@ -236,24 +236,24 @@ geograbbi.read.table <- function(file, header=F, chunk.size=21234, verbose=F, de
 
 #' Read a very large csv file
 #'
-#' This function is a wrapper for \code{\link{geograbbi.read.table}()}
+#' This function is a wrapper for \code{\link{geograbi.read.table}()}
 #' for reading csv files.
 #'
 #' @examples
 #' \donttest{
 #' ## download a DNA methylation dataset
-#' dataset <- geograbbi.read.gse.matrix("GSE116339")
+#' dataset <- geograbi.read.gse.matrix("GSE116339")
 #' ## dataset$data is empty because sometimes GEO
 #' ## stores the genomic data in a supplementary file
 #' ## instead of in the series matrix file
 #'
 #' ## download the supplementary file
-#' filename <- geograbbi.download.supplementary.file(gse="GSE116339",
+#' filename <- geograbi.download.supplementary.file(gse="GSE116339",
 #'                     filename="GSE116339_Processed_Matrix.csv.gz")
 #' ## 15 minutes
 #'
 #' ## load the file
-#' dataset$data <- geograbbi.read.csv(filename)
+#' dataset$data <- geograbi.read.csv(filename)
 #' ## 35 minutes
 #'
 #' ## make the first column the rownames (features)
@@ -269,10 +269,10 @@ geograbbi.read.table <- function(file, header=F, chunk.size=21234, verbose=F, de
 #' }
 #' 
 #' @export
-geograbbi.read.csv <- function(file, header = TRUE, sep = ",", quote = "\"", dec = ".",
+geograbi.read.csv <- function(file, header = TRUE, sep = ",", quote = "\"", dec = ".",
                               fill = TRUE, comment.char = "",
                               verbose=F, debug=F, chunk.size=21234, ...) {
-    geograbbi.read.table(file = file, header = header, sep = sep, quote = quote,
+    geograbi.read.table(file = file, header = header, sep = sep, quote = quote,
                         dec = dec, fill = fill, comment.char = comment.char,
                         chunk.size=chunk.size,
                         verbose=verbose, debug=debug,...)

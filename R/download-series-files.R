@@ -9,7 +9,7 @@
 #' @param gpls vector of platform gpl codes with same length as \code{gses}
 #'
 #' @export 
-geograbbi.download.series.files <- function(path=".", gses, gpls = NULL) {
+geograbi.download.series.files <- function(path=".", gses, gpls = NULL) {
     require(RCurl)
     filenames <- sapply(seq_along(gses), function(gse) {
         urls <- get.gse.matrix.url(gses[gse])
@@ -52,7 +52,7 @@ geograbbi.download.series.files <- function(path=".", gses, gpls = NULL) {
 #' @param url optional manual url supply for non-ftp based file downloads
 #'
 #' @export
-geograbbi.download.supplementary.file <- function(path=".", gse=NULL, filename=NULL, url=NULL) {
+geograbi.download.supplementary.file <- function(path=".", gse=NULL, filename=NULL, url=NULL) {
     require(RCurl)
     if (is.null(url)) {
         stopifnot(!is.null(gse) && !is.null(filename))

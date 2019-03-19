@@ -1,4 +1,4 @@
-geograbr
+geograbi
 ========
 
 A tool for efficiently grabbing usable metadata and experiment data off GEO for use in R.
@@ -9,18 +9,18 @@ Getting experiment metadata and GSE accession numbers
 Metadata by experiment accession number can be returned for **all** GEO experiments or **by GPL platform code**
 
 ``` r
-devtools::load_all("~/repos/geograbr")
+devtools::load_all("~/repos/geograbi")
 require("XML")
 ```
 
 ``` r
 ## all datasets in GEO
-datasets <- geograbr.retrieve.datasets()  ## about 4min
+datasets <- geograbi.retrieve.datasets()  ## about 4min
 ```
 
 ``` r
 ## all Illumina Infinium 27K DNA methylation datasets
-datasets <- geograbr.retrieve.datasets(gpl = c("GPL13534")) ## 5sec
+datasets <- geograbi.retrieve.datasets(gpl = c("GPL13534")) ## 5sec
 ```
 
     > Thu Jan 17 14:47:24 2019 retrieving dataset UID 1 ...
@@ -46,19 +46,19 @@ Download GEO series matix files for by GSE experiment numbers
 
 ``` r
 ## by individual gses
-filenames <- geograbr.download.series.files(gses = "GSE94734")
+filenames <- geograbi.download.series.files(gses = "GSE94734")
 
 ## or for a vector of gses
-filenames <- geograbr.download.series.files(gses = datasets$accession[1:6])
+filenames <- geograbi.download.series.files(gses = datasets$accession[1:6])
 ```
 
 Grab sample-level data from downloaded series matrix files
 ----------------------------------------------------------
 
 ``` r
-gse94734 <- geograbr.get.samples(filename = "GSE94734_series_matrix.txt.gz")
+gse94734 <- geograbi.get.samples(filename = "GSE94734_series_matrix.txt.gz")
 
-gses <- lapply(na.omit(filenames), geograbr.get.samples)
+gses <- lapply(na.omit(filenames), geograbi.get.samples)
 ```
 
 Grab experiment data from downloaded series matrix files
@@ -67,5 +67,5 @@ Grab experiment data from downloaded series matrix files
 Automatically saves data to `.rdata` format at user-defined path
 
 ``` r
-test <- geograbr.get.data(filename = "GSE94734_series_matrix.txt.gz")
+test <- geograbi.get.data(filename = "GSE94734_series_matrix.txt.gz")
 ```
