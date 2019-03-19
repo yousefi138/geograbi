@@ -3,7 +3,15 @@
 geograbi.get.samples <- function(filename, FUN=geograbi.read.gse.matrix) {
     gse <- tolower(names(filename))
     cat(date(), "reading", gse,"\n")
-    FUN(filename, data=FALSE)
+    FUN(filename, data=FALSE)$samples
+}
+
+#' Get GEO series information
+#' @export
+geograbi.get.series <- function(filename, FUN=geograbi.read.gse.matrix) {
+    gse <- tolower(names(filename))
+    cat(date(), "reading", gse,"\n")
+    FUN(filename, data=FALSE)$series
 }
 
 #' Get GEO data 
@@ -72,9 +80,11 @@ read.until <- function(pattern, con, n=100, ...) {
 #' GSE matrix file.
 #' @param data If \code{TRUE}, then load the data matrix,
 #' otherwise load only the sample information.
-#' @return A list with two elements:
+#' @return A list with three elements:
 #' \itemize{
 #' \item{"samples"}{The sample data frame with one row per sample.}
+#' \item{"series"}{The series vector with information on the entire gse 
+#' series record}
 #' \item{"data"}{The data matrix with one row per feature and one per sample.}
 #' }
 #' @export
@@ -113,7 +123,7 @@ geograbi.read.gse.matrix <- function (filename, data = TRUE) {
 
     ## parse series and sample information
     txt <- textConnection(lines)    
-    header <- read.table(txt, sep = "\t", header = F, nrows = nseries, 
+    series <- read.table(txt, sep = "\t", header = F, nrows = nseries, 
                          stringsAsFactors = F)    
     samples <- read.table(txt, sep = "\t", header = F, nrows = nsamples, 
                           stringsAsFactors = F)
@@ -121,15 +131,21 @@ geograbi.read.gse.matrix <- function (filename, data = TRUE) {
 
     ## transpose so we have 1 row per sample
     samples <- t(samples)
+    series <- t(series)
 
     ## the first row gives the column names
     colnames(samples) <- sub("!Sample_", "", samples[1,])
     samples <- data.frame(samples[-1, ], stringsAsFactors = F)
     rownames(samples) <- samples$geo_accession
 
+    ## the first row gives the column names
+    series.names <- sub("!Series_", "", series[1,])
+    series <- series[-1, ]
+    names(series) <- series.names
+
     ## if just sample information requested, then return
     if (data == FALSE) 
-        return(samples)
+        return(list(samples = samples, series = series))
 
     ## otherwise, reopen the file
     con <- file(filename, "r")
@@ -183,7 +199,7 @@ geograbi.read.gse.matrix <- function (filename, data = TRUE) {
     #if (!is.null(geo.sites)) 
     #    data <- data[match(geo.sites, rownames(data)), , drop = F]
     
-    list(data = data, samples = samples)
+    list(data = data, samples = samples, series = series)
 }
 
 

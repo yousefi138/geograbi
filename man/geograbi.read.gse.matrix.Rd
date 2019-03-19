@@ -15,9 +15,11 @@ GSE matrix file.}
 otherwise load only the sample information.}
 }
 \value{
-A list with two elements:
+A list with three elements:
 \itemize{
 \item{"samples"}{The sample data frame with one row per sample.}
+\item{"series"}{The series vector with information on the entire gse 
+series record}
 \item{"data"}{The data matrix with one row per feature and one per sample.}
 }
 }

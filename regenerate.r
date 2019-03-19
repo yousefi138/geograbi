@@ -11,8 +11,8 @@ lapply(packages, require, character.only=T)
 
 document("geograbi")
 
-system("R CMD INSTALL geograbbi")
-reload(inst("geograbbi"))
+system("R CMD INSTALL geograbi")
+reload(inst("geograbi"))
 
 ## inherited meffil code for running tests
 # source("geograbbi/data-raw/globals.r",chdir=T)
