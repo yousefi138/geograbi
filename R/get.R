@@ -26,15 +26,18 @@ geograbi.get.data <- function(filename, path=NULL,
     FUN=geograbi.read.gse.matrix) {
     gse <- tolower(names(filename))
 
-    cat(date(), "reading", gse,"\n")
-    x <- FUN(filename)$data
-
     if(!is.null(path)) {
       data.filename <- file.path(path, paste(tolower(gse), "rda", sep="."))
         if (file.exists(data.filename)){
           cat("rdata file already exists for", gse, "\n", data.filename, "\n")
           return(-1)
           }
+
+    cat(date(), "reading", gse,"\n")
+    x <- FUN(filename)$data
+
+    if(!is.null(path)) {
+      data.filename <- file.path(path, paste(tolower(gse), "rda", sep="."))
       cat(date(), "saving", gse, "\n")
       save(x, file=data.filename)
     }
