@@ -5,8 +5,8 @@
 \title{Read a very large csv file}
 \usage{
 geograbi.read.csv(file, header = TRUE, sep = ",", quote = "\\"",
-  dec = ".", fill = TRUE, comment.char = "", verbose = F, debug = F,
-  chunk.size = 21234, ...)
+  dec = ".", fill = TRUE, comment.char = "", verbose = F,
+  debug = F, chunk.size = 21234, ...)
 }
 \description{
 This function is a wrapper for \code{\link{geograbi.read.table}()}

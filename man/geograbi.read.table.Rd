@@ -4,8 +4,8 @@
 \alias{geograbi.read.table}
 \title{Read a very large table}
 \usage{
-geograbi.read.table(file, header = F, chunk.size = 21234, verbose = F,
-  debug = F, ...)
+geograbi.read.table(file, header = F, chunk.size = 21234,
+  verbose = F, debug = F, ...)
 }
 \arguments{
 \item{file}{A character connection or filename.}
