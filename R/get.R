@@ -13,7 +13,12 @@ geograbi.get.series <- function(filename, FUN=geograbi.read.gse.matrix) {
     cat(date(), "reading", gse,"\n")
     FUN(filename, data=FALSE)$series
 }
-
+#' List the GEO supplementary files available for a GSE experiment
+#' @export
+geograbi.list.supplementary.files <- function(filename, FUN=geograbi.get.series) {
+    series <- FUN(filename)
+    series[grep("supplementary", names(series))]
+}
 #' Get GEO data 
 #' 
 #' Grabs the expression/microarray/etc. data contained in the GEO series
