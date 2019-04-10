@@ -17,7 +17,7 @@ geograbi.get.series <- function(filename, FUN=geograbi.read.gse.matrix) {
 #' @export
 geograbi.list.supplementary.files <- function(filename, FUN=geograbi.get.series) {
     series <- FUN(filename)
-    series[grep("supplementary", names(series))]
+    basename(series[grep("supplementary", names(series))])
 }
 #' Get GEO data 
 #' 
