@@ -4,8 +4,10 @@
 \alias{geograbi.extract.characteristics}
 \title{Extract a characteristic field in GEO sample data}
 \usage{
-geograbi.extract.characteristics(sample.frame,
-  chr.field.str = "characteristics")
+geograbi.extract.characteristics(
+  sample.frame,
+  chr.field.str = "characteristics"
+)
 }
 \arguments{
 \item{sample.frame}{a data.frame of descriptives for a GEO experiment (i.e GSE) 

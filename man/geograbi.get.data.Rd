@@ -4,8 +4,7 @@
 \alias{geograbi.get.data}
 \title{Get GEO data}
 \usage{
-geograbi.get.data(filename, path = NULL,
-  FUN = geograbi.read.gse.matrix)
+geograbi.get.data(filename, path = NULL, FUN = geograbi.read.gse.matrix)
 }
 \arguments{
 \item{filename}{}

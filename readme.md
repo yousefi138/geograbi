@@ -52,11 +52,11 @@ filenames <- geograbi.download.series.files(gses = "GSE94734")
 filenames <- geograbi.download.series.files(gses = datasets$accession[1:6])
 ```
 
-Grab sample-level data from downloaded series matrix files
-----------------------------------------------------------
+Grab data from downloaded series matrix files
+---------------------------------------------
 
 ``` r
-gse94734 <- geograbi.get.samples(filename = "GSE94734_series_matrix.txt.gz")
+samples <- geograbi.get.samples(filename = "GSE94734_series_matrix.txt.gz")
 
 gses <- lapply(na.omit(filenames), geograbi.get.samples)
 ```
@@ -67,5 +67,45 @@ Grab experiment data from downloaded series matrix files
 Automatically saves data to `.rdata` format at user-defined path
 
 ``` r
-test <- geograbi.get.data(filename = "GSE94734_series_matrix.txt.gz")
+dat <- geograbi.get.data(filename = "GSE94734_series_matrix.txt.gz")
 ```
+
+Grab data directly from GEO online
+----------------------------------
+
+Just the sample data
+
+``` r
+samples <- geograbi.get.samples("GSE94734")
+```
+
+Just the experiment data
+
+``` r
+dat <- geograbi.get.data("GSE94734")
+```
+
+Both the sample and experiment data at the same time
+
+``` r
+dataset <- geograbi.read.gse.matrix("GSE94734")
+```
+
+``` r
+names(dataset)
+```
+
+    > [1] "data"    "samples" "series" 
+
+``` r
+dim(dataset$samples)
+```
+
+    > [1] 178  46
+	
+``` r
+dim(dataset$data)
+```
+
+    > [1] 485578    178
+

@@ -1,13 +1,13 @@
 Package: geograbi
 Title: Query and grab records from GEO efficiently
-Version: 0.1.0
+Version: 0.1.1
 Date: 2017-08-21
 Authors: person("Paul", "Yousefi", email = "paul.yousefi@bristol.ac.uk", role = c("aut", "cre"))
 Maintainer: Paul Yousefi <paul.yousefi@bristol.ac.uk>
 Description: An interface for querying GEO records, and retrieving sample and experiment data
-Depends: XML
+Depends: XML, data.table
 Suggests: RCurl
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.0
+RoxygenNote: 7.2.3

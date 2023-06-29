@@ -4,8 +4,12 @@
 \alias{geograbi.download.supplementary.file}
 \title{Download a GEO supplementary file}
 \usage{
-geograbi.download.supplementary.file(path = ".", gse = NULL,
-  filename = NULL, url = NULL)
+geograbi.download.supplementary.file(
+  path = ".",
+  gse = NULL,
+  filename = NULL,
+  url = NULL
+)
 }
 \arguments{
 \item{path}{path for saving downloaded GEO series matrix files}

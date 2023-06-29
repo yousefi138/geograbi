@@ -4,8 +4,7 @@
 \alias{geograbi.read.table}
 \title{Read a very large table}
 \usage{
-geograbi.read.table(file, header = F, chunk.size = 21234,
-  verbose = F, debug = F, ...)
+geograbi.read.table(file, header = F, chunk.size = NA, verbose = F, ...)
 }
 \arguments{
 \item{file}{A character connection or filename.}
@@ -13,22 +12,18 @@ geograbi.read.table(file, header = F, chunk.size = 21234,
 \item{header}{A logical indicating if the file contains a header
 (default: \code{FALSE}).}
 
-\item{chunk.size}{Size of partitions to read in bytes
-(default: 21234).}
+\item{chunk.size}{Deprecated parameter.
+(default: NA).}
 
 \item{verbose}{A logical indicating whether or not to print
 status updates (default: \code{FALSE}).}
 
-\item{debug}{A logical indicating whether or not to run
-\code{\link{browser}()} after attempting to read the file partitions.}
-
-\item{...}{Additional arguments passed to \code{\link{read.table}()}.}
+\item{...}{Additional arguments passed to \code{\link{data.table::fread}()}.}
 }
 \value{
 A data frame as if \code{\link{read.table}()} had been used.
 }
 \description{
-\code{\link{read.table}()} is extremely memory inefficient and slow.
-This function somewhat resolves this by applying \code{\link{read.table}()}
-multiple times to partitions of the table.
+This function used to be an attempt to adapt \code{\link{read.table}()}
+for large files. It is now a wrapper for \code{\link{data.table::fread}()}.
 }

@@ -155,18 +155,14 @@ geograbi.read.gse.matrix <- function (filename, data = TRUE) {
     if (data == FALSE) 
         return(list(samples = samples, series = series))
 
-    ## otherwise, reopen the file
-    con <- file(filename, "r")
-
-    ## read to the beginning of the matrix
-    readLines(con, matrix.start-1) 
-
-    ## read the matrix
-    data <- read.table(con, sep = "\t", header = TRUE, quote = "\"", 
-                       dec = ".", fill = TRUE,
-                       na.strings = c("NA", "null", "NULL", "Null"),
-                       comment.char = "")
-    close(con)
+    ## otherwise, reopen the file and read the matrix
+    data <- fread(
+        filename,
+        skip=matrix.start-1,
+        sep = "\t", header = TRUE, quote = "\"", 
+        dec = ".", fill = TRUE,
+        na.strings = c("NA", "null", "NULL", "Null"))
+    data <- as.data.frame(data)
 
     ## if the data matrix is empty (GEO sometimes does this!),
     ## then the matrix will contain one row of NAs, remove them.
@@ -212,49 +208,26 @@ geograbi.read.gse.matrix <- function (filename, data = TRUE) {
 
 
 #' Read a very large table
-#' 
-#' \code{\link{read.table}()} is extremely memory inefficient and slow.
-#' This function somewhat resolves this by applying \code{\link{read.table}()}
-#' multiple times to partitions of the table.
+#'
+#' This function used to be an attempt to adapt \code{\link{read.table}()}
+#' for large files. It is now a wrapper for \code{\link{data.table::fread}()}.
 #'
 #' @param file A character connection or filename.
 #' @param header A logical indicating if the file contains a header
 #' (default: \code{FALSE}).
-#' @param chunk.size Size of partitions to read in bytes
-#' (default: 21234).
+#' @param chunk.size Deprecated parameter.  
+#' (default: NA).
 #' @param verbose A logical indicating whether or not to print
 #' status updates (default: \code{FALSE}).
-#' @param debug A logical indicating whether or not to run
-#' \code{\link{browser}()} after attempting to read the file partitions.
-#' @param ... Additional arguments passed to \code{\link{read.table}()}.
+#' @param ... Additional arguments passed to \code{\link{data.table::fread}()}.
 #' @return A data frame as if \code{\link{read.table}()} had been used.
 #' 
 #' @export
-geograbi.read.table <- function(file, header=F, chunk.size=21234, verbose=F, debug=F, ...) {
-    if (is.character(file)) {
-        file <- file(file, "r")
-        on.exit(close(file))
-    }
-    x <- list()
-    is.more <- T
-    while (is.more) {
-        if (verbose)
-            cat(date(), "reading chunk", length(x), "\n")
-        tryCatch({
-            x[[length(x) + 1]] <- read.table(file, header=header && length(x) == 0,
-                                             nrows=chunk.size, ...)
-        }, error=function(e) {
-            is.more <<- F
-            if (e$message != "no lines available in input") {
-                signalCondition(e)
-            }              
-        })
-    }
-    if (debug)
-        browser()
-    if (length(x) > 1)
-        for (i in 2:length(x)) colnames(x[[i]]) <- colnames(x[[1]])
-    do.call(rbind, x)
+geograbi.read.table <- function(file, header=F, chunk.size=NA, verbose=F, ...) {
+    if (!is.na(chunk.size))
+        warning("geograbi.read.table() no longer uses 'chunk.size'")
+    
+    as.data.frame(data.table::fread(file, header=header, ...))
 }
 
 
