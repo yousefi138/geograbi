@@ -129,6 +129,9 @@ geograbi.read.gse.matrix <- function (filename, data = TRUE) {
     ## position in the file where the data matrix starts
     matrix.start <- which(lines == "!series_matrix_table_begin") + 1
 
+    if (nseries == 0 || nsamples == 0 || length(matrix.start)==0)
+        stop(paste(filename, "is not in GEO Series Matrix format"))
+    
     ## parse series and sample information
     txt <- textConnection(lines)    
     series <- read.table(txt, sep = "\t", header = F, nrows = nseries, 
