@@ -32,9 +32,9 @@ geograbi.get.data <- function(filename, path=NULL,
     gse <- tolower(names(filename))
 
     if(!is.null(path)) {
-      data.filename <- file.path(path, paste(tolower(gse), "rda", sep="."))
+      data.filename <- file.path(path, paste(tolower(gse), "csv.gz", sep="."))
         if (file.exists(data.filename)){
-          cat("rdata file already exists for", gse, "\n", data.filename, "\n")
+          cat("csv.gz file already exists for", gse, "\n", data.filename, "\n")
           return(-1)
           }
     }
@@ -42,10 +42,10 @@ geograbi.get.data <- function(filename, path=NULL,
     x <- FUN(filename)$data
 
     if(!is.null(path)) {
-      data.filename <- file.path(path, paste(tolower(gse), "rda", sep="."))
+      data.filename <- file.path(path, paste(tolower(gse), "csv.gz", sep="."))
       cat(date(), "saving", gse, "\n")
-      save(x, file=data.filename)
-    }
+      data.table::fwrite(x, file=data.filename)
+    }   
     return(x)
 }
 
