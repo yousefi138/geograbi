@@ -27,9 +27,9 @@ geograbi.list.supplementary.files <- function(filename, FUN=geograbi.get.series)
 #' @param filename 
 #' 
 #' @export
-geograbi.get.data <- function(filename, path=NULL, 
+geograbi.get.data <- function(filename, gse = names(filename), path=NULL, 
     FUN=geograbi.read.gse.matrix) {
-    gse <- tolower(names(filename))
+    gse <- tolower(gse)
 
     if(!is.null(path)) {
       data.filename <- file.path(path, paste(tolower(gse), "csv.gz", sep="."))
