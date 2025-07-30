@@ -44,7 +44,7 @@ geograbi.get.data <- function(filename, gse = names(filename), path=NULL,
     if(!is.null(path)) {
       data.filename <- file.path(path, paste(tolower(gse), "csv.gz", sep="."))
       cat(date(), "saving", gse, "\n")
-      data.table::fwrite(x, file=data.filename)
+      data.table::fwrite(data.frame(cg = rownames(x), x, check.names=F), file=data.filename)
     }   
     return(x)
 }
